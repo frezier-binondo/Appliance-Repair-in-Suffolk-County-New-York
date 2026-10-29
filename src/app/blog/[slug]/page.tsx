@@ -53,7 +53,7 @@ export default function SingleBlogPostPage({ params }: { params: { slug: string 
       "name": BUSINESS_INFO.name,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=600&q=80"
+        "url": "https://plus.unsplash.com/premium_photo-1661342490985-26da70d07a52?auto=format&fit=crop&w=600&q=80"
       }
     }
   };

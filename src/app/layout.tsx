@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=80",
+        url: "https://plus.unsplash.com/premium_photo-1661342490985-26da70d07a52?auto=format&fit=crop&w=1200&q=80",
         width: 1200,
         height: 630,
         alt: "Appliance Repair in Suffolk County New York",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Appliance Repair Suffolk County, NY",
     description: "Emergency same-day appliance repair across Suffolk County. Call (631) 505-5046.",
-    images: ["https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=80"],
+    images: ["https://plus.unsplash.com/premium_photo-1661342490985-26da70d07a52?auto=format&fit=crop&w=1200&q=80"],
   },
   robots: {
     index: true,
@@ -80,7 +80,7 @@ export default function RootLayout({
     "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
     "name": BUSINESS_INFO.name,
     "alternateName": BUSINESS_INFO.shortName,
-    "image": "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=80",
+    "image": "https://plus.unsplash.com/premium_photo-1661342490985-26da70d07a52?auto=format&fit=crop&w=1200&q=80",
     "telephone": BUSINESS_INFO.phone,
     "email": BUSINESS_INFO.email,
     "url": "https://suffolkcountyappliancerepair.com",

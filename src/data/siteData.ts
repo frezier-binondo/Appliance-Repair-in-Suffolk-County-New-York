@@ -93,7 +93,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     metaDescription: "Need refrigerator repair in Suffolk County, NY? Local technicians fix cooling, leaking and noise problems with upfront quotes. Call (631) 505-5046 to book.",
     targetKeyword: "Refrigerator Repair Suffolk County NY",
     shortDesc: "Fast diagnosis and repairs for French-door, side-by-side, bottom-freezer, and built-in luxury refrigerators.",
-    image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=80",
+    image: "https://plus.unsplash.com/premium_photo-1661342490985-26da70d07a52?auto=format&fit=crop&w=1200&q=80",
     icon: "Refrigerator",
     commonProblems: [
       { title: "Not Cooling or Warm Fresh Food Section", desc: "Evaporator fan failure, frozen evaporator coil, bad defrost thermostat, or sealed-system refrigerant leaks." },
@@ -299,7 +299,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     metaDescription: "Need dishwasher repair in Suffolk County, NY? Local technicians fix leaks, drain issues and cleaning problems with upfront quotes. Call (631) 505-5046 to book.",
     targetKeyword: "Dishwasher Repair Suffolk County NY",
     shortDesc: "Complete service for built-in, drawer, and portable dishwashers from Bosch, KitchenAid, and all major brands.",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1556185781-a47769abb7ee?auto=format&fit=crop&w=1200&q=80",
     icon: "Sparkles",
     commonProblems: [
       { title: "Dishwasher Won't Drain Standing Water", desc: "Clogged filter mesh, blocked air gap, kinked drain line, or burnt drain pump motor." },
@@ -349,7 +349,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     metaDescription: "Need oven repair in Suffolk County, NY? Local technicians fix heating, temperature and door problems with upfront quotes. Call (631) 505-5046 to book.",
     targetKeyword: "Oven Repair Suffolk County NY",
     shortDesc: "Accurate repair for single and double wall ovens, convection ovens, and electric/gas baking units.",
-    image: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1614622394738-7e6df45fdfcd?auto=format&fit=crop&w=1200&q=80",
     icon: "Microwave",
     commonProblems: [
       { title: "Oven Won't Heat at All", desc: "Burned-out bake or broil element, weak glow-bar igniter in gas ovens, or blown thermal fuse." },
@@ -449,7 +449,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     metaDescription: "Need cooktop repair in Suffolk County, NY? Local technicians fix burner, igniter and induction faults with upfront quotes. Call (631) 505-5046 to book.",
     targetKeyword: "Cooktop Repair Suffolk County NY",
     shortDesc: "Specialized service for built-in glass ceramic, radiant electric, and luxury induction cooktops.",
-    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1578845425669-b6562f83b11e?auto=format&fit=crop&w=1200&q=80",
     icon: "Zap",
     commonProblems: [
       { title: "Induction Zone Shuts Down or Shows Error Codes", desc: "Overheating induction generator board, cooling fan failure, or filter board capacitor defect." },
@@ -803,7 +803,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "October 18, 2026",
     readTime: "6 min read",
     category: "Refrigerator Repair",
-    image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=800&q=80",
+    image: "https://plus.unsplash.com/premium_photo-1661342490985-26da70d07a52?auto=format&fit=crop&w=800&q=80",
     servicePageUrl: "/refrigerator-repair/",
     servicePageAnchor: "Refrigerator Repair Services",
     townPageUrls: [
@@ -902,7 +902,7 @@ Have your dryer inspected, internal lint chambers vacuumed, and exhaust duct che
     date: "September 04, 2026",
     readTime: "5 min read",
     category: "Dishwasher Repair",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1556185781-a47769abb7ee?auto=format&fit=crop&w=800&q=80",
     servicePageUrl: "/dishwasher-repair/",
     servicePageAnchor: "Dishwasher Repair Services",
     townPageUrls: [

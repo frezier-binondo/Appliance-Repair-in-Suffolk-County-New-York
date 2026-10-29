@@ -79,7 +79,7 @@ export default function AboutUsPage() {
 
           <div className="lg:col-span-5 relative h-80 w-full rounded-2xl overflow-hidden shadow-xl border border-slate-200">
             <Image
-              src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+              src="https://plus.unsplash.com/premium_photo-1683134584513-db73da8ebc29?auto=format&fit=crop&w=1200&q=80"
               alt="Licensed appliance technician at work in Long Island"
               fill
               className="object-cover"
