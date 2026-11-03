@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { SERVICES_LIST, LOCATIONS_LIST, BLOG_POSTS } from "@/data/siteData";
+import { SERVICE_LOCATION_PAGES } from "@/data/serviceLocationsData";
 
 const BASE_URL = "https://suffolkcountyappliancerepair.com";
 
@@ -26,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   }));
 
-  // Service silo pages
+  // Service silo pages (14 core & specialty services)
   const servicePages: MetadataRoute.Sitemap = SERVICES_LIST.map((service) => ({
     url: `${BASE_URL}/${service.slug}/`,
     lastModified,
@@ -34,12 +35,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Location hub pages
+  // Location hub pages (5 town hubs)
   const locationPages: MetadataRoute.Sitemap = LOCATIONS_LIST.map((location) => ({
     url: `${BASE_URL}/${location.slug}/`,
     lastModified,
     changeFrequency: "weekly",
     priority: 0.9,
+  }));
+
+  // All 70 Service-by-Town Pages (14 services x 5 towns)
+  const serviceLocationPages: MetadataRoute.Sitemap = SERVICE_LOCATION_PAGES.map((page) => ({
+    url: `${BASE_URL}${page.slug}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.85,
   }));
 
   // Blog articles
@@ -50,5 +59,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...servicePages, ...locationPages, ...blogPages];
+  return [
+    ...staticPages, 
+    ...servicePages, 
+    ...locationPages, 
+    ...serviceLocationPages, 
+    ...blogPages
+  ];
 }
