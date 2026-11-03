@@ -5,9 +5,27 @@ const path = require('path');
 const wb = XLSX.readFile('Suffolk_County_Appliance_Repair_SEO_Silo.xlsx');
 const sheet = wb.Sheets['SEO Silo'];
 const rows = XLSX.utils.sheet_to_json(sheet);
-const servLoc = rows.filter(r => r['Page Type'] === 'Service + Location');
 
-console.log('Total Service + Location rows in sheet:', servLoc.length);
+// The ONLY 8 services requested by the user to replicate across location pages
+const ALLOWED_SERVICES = [
+  'refrigerator-repair',
+  'freezer-repair',
+  'washer-repair',
+  'dryer-repair',
+  'dishwasher-repair',
+  'oven-repair',
+  'stove-range-repair',
+  'cooktop-repair'
+];
+
+const servLoc = rows.filter(r => {
+  if (r['Page Type'] !== 'Service + Location') return false;
+  const rawSlug = (r['URL Slug'] || '').trim().replace(/^\/|\/$/g, '');
+  const serviceSlug = rawSlug.split('/')[0];
+  return ALLOWED_SERVICES.includes(serviceSlug);
+});
+
+console.log(`Filtered to ${servLoc.length} Service + Location rows for the 8 requested services.`);
 
 const serviceNameMap = {
   'refrigerator-repair': 'Refrigerator Repair',
@@ -17,13 +35,7 @@ const serviceNameMap = {
   'dishwasher-repair': 'Dishwasher Repair',
   'oven-repair': 'Oven Repair',
   'stove-range-repair': 'Stove & Range Repair',
-  'cooktop-repair': 'Cooktop Repair',
-  'microwave-repair': 'Microwave Repair',
-  'ice-maker-repair': 'Ice Maker Repair',
-  'wine-cooler-repair': 'Wine Cooler Repair',
-  'garbage-disposal-repair': 'Garbage Disposal Repair',
-  'commercial-appliance-repair': 'Commercial Appliance Repair',
-  'luxury-appliance-repair': 'Luxury Appliance Repair'
+  'cooktop-repair': 'Cooktop Repair'
 };
 
 const townNameMap = {
@@ -42,13 +54,7 @@ const serviceImageMap = {
   'dishwasher-repair': 'https://images.unsplash.com/photo-1556185781-a47769abb7ee?auto=format&fit=crop&w=1200&q=80',
   'oven-repair': 'https://images.unsplash.com/photo-1614622394738-7e6df45fdfcd?auto=format&fit=crop&w=1200&q=80',
   'stove-range-repair': 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80',
-  'cooktop-repair': 'https://images.unsplash.com/photo-1578845425669-b6562f83b11e?auto=format&fit=crop&w=1200&q=80',
-  'microwave-repair': 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1200&q=80',
-  'ice-maker-repair': 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80',
-  'wine-cooler-repair': 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80',
-  'garbage-disposal-repair': 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80',
-  'commercial-appliance-repair': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
-  'luxury-appliance-repair': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
+  'cooktop-repair': 'https://images.unsplash.com/photo-1578845425669-b6562f83b11e?auto=format&fit=crop&w=1200&q=80'
 };
 
 const townNeighborhoodsMap = {
@@ -98,101 +104,150 @@ for (const r of servLoc) {
   const content = cleanText(r['SEO Content'] || '');
 
   const lines = content.split('\n').map(l => l.trim()).filter(Boolean);
-  
+
   let intro = [];
   let problems = [];
-  let currentProblem = null;
   let processSteps = [];
   let brands = [];
-  let faqs = [];
-  let currentFaq = null;
   let tips = [];
   let repairOrReplace = '';
   let whyChoose = '';
+  let faqs = [];
+
   let currentSection = 'intro';
+  let curFaqQ = '';
+  let curFaqA = '';
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    if (line.startsWith('H1:')) {
-      continue;
-    } else if (line.startsWith('H2:')) {
-      const heading = line.replace(/^H2:\s*/, '').toLowerCase();
-      if (heading.includes('common') || heading.includes('problems') || heading.includes('signs')) {
+
+    if (/^#+\s+/i.test(line) || /^[A-Z0-9\s,\-\/&]{4,}:?$/.test(line)) {
+      const lower = line.toLowerCase();
+      if (lower.includes('common') || lower.includes('issues') || lower.includes('problems') || lower.includes('diagnos')) {
         currentSection = 'problems';
-      } else if (heading.includes('process') || heading.includes('how it works')) {
+        continue;
+      } else if (lower.includes('step') || lower.includes('process') || lower.includes('how we repair') || lower.includes('our repair process')) {
         currentSection = 'process';
-      } else if (heading.includes('brands')) {
+        continue;
+      } else if (lower.includes('brand') || lower.includes('makes we service')) {
         currentSection = 'brands';
-      } else if (heading.includes('faq') || heading.includes('frequently')) {
-        currentSection = 'faqs';
-      } else if (heading.includes('tips') || heading.includes('care') || heading.includes('maintenance') || (heading.includes('how ') && heading.includes('get the most'))) {
+        continue;
+      } else if (lower.includes('maintenance') || lower.includes('care tips') || lower.includes('proactive')) {
         currentSection = 'tips';
-      } else if (heading.includes('repair or replace')) {
-        currentSection = 'repairOrReplace';
-      } else if (heading.includes('why ') && heading.includes('choose')) {
-        currentSection = 'whyChoose';
-      } else {
-        currentSection = 'other';
+        continue;
+      } else if (lower.includes('repair vs') || lower.includes('replace') || lower.includes('repair-or-replace')) {
+        currentSection = 'repair_replace';
+        continue;
+      } else if (lower.includes('why choose') || lower.includes('why suffolk')) {
+        currentSection = 'why_choose';
+        continue;
+      } else if (lower.includes('faq') || lower.includes('frequently asked')) {
+        currentSection = 'faqs';
+        continue;
       }
-    } else if (line.startsWith('H3:')) {
-      if (currentSection === 'problems') {
-        currentProblem = { title: line.replace(/^H3:\s*/, ''), desc: '' };
-        problems.push(currentProblem);
-      }
-    } else if (line.startsWith('Q:')) {
-      currentFaq = { q: line.replace(/^Q:\s*/, ''), a: '' };
-      faqs.push(currentFaq);
-    } else if (line.startsWith('A:') && currentFaq) {
-      currentFaq.a = line.replace(/^A:\s*/, '');
-    } else if (line.startsWith('- ')) {
-      const item = line.replace(/^-\s*/, '');
-      if (currentSection === 'tips') {
-        tips.push(item);
-      }
-    } else if (/^\d+\.\s*/.test(line)) {
-      if (currentSection === 'process') {
-        processSteps.push(line.replace(/^\d+\.\s*/, ''));
-      }
-    } else {
-      if (currentSection === 'intro') {
+    }
+
+    if (currentSection === 'intro') {
+      if (!line.startsWith('#') && line.length > 20) {
         intro.push(line);
-      } else if (currentSection === 'problems' && currentProblem) {
-        currentProblem.desc = currentProblem.desc ? currentProblem.desc + ' ' + line : line;
-      } else if (currentSection === 'brands') {
+      }
+    } else if (currentSection === 'problems') {
+      if (/^[0-9]\.|\*|-/.test(line) || line.includes(':')) {
+        const parts = line.replace(/^[0-9]\.|\*|-/, '').trim().split(':');
+        if (parts.length >= 2) {
+          problems.push({ title: parts[0].trim(), desc: parts.slice(1).join(':').trim() });
+        } else {
+          problems.push({ title: 'Common Issue', desc: parts[0].trim() });
+        }
+      }
+    } else if (currentSection === 'process') {
+      if (/^[0-9]\.|\*|-/.test(line)) {
+        processSteps.push(line.replace(/^[0-9]\.|\*|-/, '').trim());
+      }
+    } else if (currentSection === 'brands') {
+      if (line.length > 5 && !line.startsWith('#')) {
         brands.push(line);
-      } else if (currentSection === 'tips') {
-        tips.push(line);
-      } else if (currentSection === 'repairOrReplace') {
-        repairOrReplace = repairOrReplace ? repairOrReplace + ' ' + line : line;
-      } else if (currentSection === 'whyChoose') {
-        whyChoose = whyChoose ? whyChoose + ' ' + line : line;
+      }
+    } else if (currentSection === 'tips') {
+      if (/^[0-9]\.|\*|-/.test(line)) {
+        tips.push(line.replace(/^[0-9]\.|\*|-/, '').trim());
+      }
+    } else if (currentSection === 'repair_replace') {
+      if (!line.startsWith('#')) {
+        repairOrReplace += (repairOrReplace ? ' ' : '') + line;
+      }
+    } else if (currentSection === 'why_choose') {
+      if (!line.startsWith('#')) {
+        whyChoose += (whyChoose ? ' ' : '') + line;
+      }
+    } else if (currentSection === 'faqs') {
+      if (/^Q:|^[0-9]\.|\?/i.test(line) && line.includes('?')) {
+        if (curFaqQ && curFaqA) {
+          faqs.push({ q: curFaqQ, a: curFaqA });
+        }
+        curFaqQ = line.replace(/^Q:\s*|^[0-9]\.\s*/i, '').trim();
+        curFaqA = '';
+      } else if (/^A:/i.test(line)) {
+        curFaqA = line.replace(/^A:\s*/i, '').trim();
+      } else if (curFaqQ) {
+        curFaqA += (curFaqA ? ' ' : '') + line;
       }
     }
   }
 
+  if (curFaqQ && curFaqA) {
+    faqs.push({ q: curFaqQ, a: curFaqA });
+  }
+
   if (problems.length === 0) {
     problems = [
-      { title: `Unit Not Functioning Properly`, desc: `Electrical or mechanical wear preventing normal operation in ${townName} households.` },
-      { title: `Strange Noises or Vibrations`, desc: `Worn internal bearings, belts, or motors requiring diagnostic testing.` },
-      { title: `Inconsistent Temperatures or Cycles`, desc: `Sensor or control board malfunctions disrupting daily appliance performance.` }
+      { title: 'Operational Failure', desc: `Diagnostic inspection for irregular noise, startup issues, or cycling stops in ${townName}.` },
+      { title: 'Temperature & Heat Fluctuations', desc: `Component testing of thermostats, igniters, heating coils, or compressors.` },
+      { title: 'Electrical & Sensor Errors', desc: `Diagnostic board scan, wiring checks, and sensor recalibrations.` },
+      { title: 'Wear & Tear Components', desc: `Inspection of drive belts, seals, valves, and hardware to ensure quiet performance.` }
     ];
   }
 
   if (processSteps.length === 0) {
     processSteps = [
-      `Contact our dispatch team at (631) 505-5046 or book online for your ${townName} home.`,
-      `We schedule the earliest appointment window with a courtesy call 30 minutes before arrival.`,
-      `Your certified technician diagnoses the fault and provides a firm upfront quote.`,
-      `With your approval, we complete the repair using factory-certified OEM parts.`,
-      `We test full functionality and back the completed job with our 90-day parts and labor warranty.`
+      'Comprehensive Diagnosis: Accurate pinpointing of mechanical, electrical, and sensor malfunctions.',
+      'Transparent Flat-Rate Estimate: Complete itemized cost breakdown with no hidden fees.',
+      'OEM Parts Replacement: Genuine manufacturer components designed specifically for your unit.',
+      'Performance & Safety Validation: Multi-point operational cycle check.',
+      '90-Day Parts & Labor Warranty: Complete guarantee on all completed work.'
+    ];
+  }
+
+  if (faqs.length === 0) {
+    faqs = [
+      { q: `How fast can a technician arrive for ${serviceName.toLowerCase()} in ${townName}?`, a: `We provide same-day service for service calls scheduled before 12:00 PM, and guaranteed next-day dispatch across ${townName}.` },
+      { q: `Do you provide a warranty on repairs in ${townName}?`, a: `Yes, all repairs completed by our certified technicians come with our 90-day parts and labor warranty.` },
+      { q: `Are your technicians licensed and insured in Suffolk County?`, a: `Yes, our technicians are licensed under Suffolk County DCA License #49281-H, fully insured, and EPA Section 608 Universal Certified.` }
     ];
   }
 
   const rawInternal = r['Internal Links (anchor -> URL)'] || '';
   const internalLinks = rawInternal.split('\n').filter(Boolean).map(l => {
-    const [anchor, url] = l.split('->').map(s => s ? s.trim() : '');
+    let [anchor, url] = l.split('->').map(s => s ? s.trim() : '');
+    if (!anchor || !url) return null;
+
+    // Sanitize any links to removed services so we don't have 404 links
+    if (url.includes('/ice-maker-repair/')) {
+      url = `/freezer-repair/${townSlug}/`;
+      anchor = `${townName.split(',')[0]} Freezer Repair`;
+    } else if (url.includes('/garbage-disposal-repair/')) {
+      url = `/dishwasher-repair/${townSlug}/`;
+      anchor = `${townName.split(',')[0]} Dishwasher Repair`;
+    } else if (url.includes('/wine-cooler-repair/')) {
+      url = `/refrigerator-repair/${townSlug}/`;
+      anchor = `${townName.split(',')[0]} Refrigerator Repair`;
+    } else if (url.includes('/luxury-appliance-repair/') || url.includes('/commercial-appliance-repair/')) {
+      url = `/appliance-repair-services/`;
+      anchor = `Suffolk Appliance Repair Services`;
+    }
+
     return { anchor, url };
-  }).filter(l => l.anchor && l.url);
+  }).filter(Boolean);
 
   const rawExternal = r['External Links (anchor -> URL)'] || '';
   const externalLinks = rawExternal.split('\n').filter(Boolean).map(l => {
@@ -231,7 +286,8 @@ for (const r of servLoc) {
 fs.writeFileSync(path.join(__dirname, '../src/data/serviceLocationsData.json'), JSON.stringify(parsedItems, null, 2), 'utf8');
 
 // Write TS
-const tsContent = `// Auto-generated 70 Service-by-Town Pages from Suffolk_County_Appliance_Repair_SEO_Silo.xlsx
+const tsContent = `// Auto-generated 40 Service-by-Town Pages from Suffolk_County_Appliance_Repair_SEO_Silo.xlsx
+// Exactly 8 core services across 5 Suffolk County towns
 import serviceLocationsJson from "./serviceLocationsData.json";
 
 export interface ServiceLocationPage {
@@ -268,6 +324,14 @@ export function getServiceLocationPage(serviceSlug: string, townSlug: string): S
   );
 }
 
+export function getPagesForService(serviceSlug: string): ServiceLocationPage[] {
+  return SERVICE_LOCATION_PAGES.filter((p) => p.serviceSlug === serviceSlug);
+}
+
+export function getPagesForTown(townSlug: string): ServiceLocationPage[] {
+  return SERVICE_LOCATION_PAGES.filter((p) => p.townSlug === townSlug);
+}
+
 export function getAllServiceLocationSlugs(): { service: string; town: string }[] {
   return SERVICE_LOCATION_PAGES.map((p) => ({
     service: p.serviceSlug,
@@ -277,4 +341,5 @@ export function getAllServiceLocationSlugs(): { service: string; town: string }[
 `;
 
 fs.writeFileSync(path.join(__dirname, '../src/data/serviceLocationsData.ts'), tsContent, 'utf8');
-console.log('Generated both serviceLocationsData.json and serviceLocationsData.ts successfully!');
+
+console.log(`Successfully generated ${parsedItems.length} pages in serviceLocationsData.json and serviceLocationsData.ts!`);

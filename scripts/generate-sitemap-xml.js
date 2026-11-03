@@ -29,12 +29,7 @@ const serviceSilos = [
   'oven-repair',
   'stove-range-repair',
   'cooktop-repair',
-  'microwave-repair',
-  'ice-maker-repair',
-  'wine-cooler-repair',
-  'garbage-disposal-repair',
-  'commercial-appliance-repair',
-  'luxury-appliance-repair'
+  'microwave-repair'
 ].map(s => ({
   url: `${BASE_URL}/${s}/`,
   priority: '0.9',
@@ -58,16 +53,16 @@ const blogPosts = [
   'why-is-freezer-frosting-up',
   'washing-machine-not-draining-troubleshooting',
   'dryer-takes-too-long-fire-hazard',
-  'dishwasher-not-cleaning-dishes',
-  'gas-stove-burner-clicking-causes'
+  'dishwasher-leaves-dishes-dirty',
+  'gas-vs-electric-stove-troubleshooting'
 ].map(b => ({
   url: `${BASE_URL}/blog/${b}/`,
   priority: '0.7',
   changefreq: 'monthly'
 }));
 
-const serviceLocationItems = serviceLocationsData.map(p => ({
-  url: `${BASE_URL}${p.slug}`,
+const serviceTownPages = serviceLocationsData.map(item => ({
+  url: `${BASE_URL}${item.slug}`,
   priority: '0.85',
   changefreq: 'weekly'
 }));
@@ -76,22 +71,23 @@ const allUrls = [
   ...staticPages,
   ...serviceSilos,
   ...locationHubs,
-  ...serviceLocationItems,
+  ...serviceTownPages,
   ...blogPosts
 ];
 
-console.log('Total URLs in generated sitemap:', allUrls.length);
+let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allUrls.map(item => `  <url>
-    <loc>${item.url}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${item.changefreq}</changefreq>
-    <priority>${item.priority}</priority>
-  </url>`).join('\n')}
-</urlset>
-`;
+for (const entry of allUrls) {
+  xml += `  <url>\n`;
+  xml += `    <loc>${entry.url}</loc>\n`;
+  xml += `    <lastmod>${today}</lastmod>\n`;
+  xml += `    <changefreq>${entry.changefreq}</changefreq>\n`;
+  xml += `    <priority>${entry.priority}</priority>\n`;
+  xml += `  </url>\n`;
+}
+
+xml += `</urlset>\n`;
 
 fs.writeFileSync(path.join(__dirname, '../public/sitemap.xml'), xml, 'utf8');
-console.log('Wrote public/sitemap.xml successfully with', allUrls.length, 'URLs!');
+console.log(`Generated public/sitemap.xml with ${allUrls.length} URLs successfully!`);

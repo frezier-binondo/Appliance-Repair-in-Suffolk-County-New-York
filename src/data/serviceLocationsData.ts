@@ -1,4 +1,5 @@
-// Auto-generated 70 Service-by-Town Pages from Suffolk_County_Appliance_Repair_SEO_Silo.xlsx
+// Auto-generated 40 Service-by-Town Pages from Suffolk_County_Appliance_Repair_SEO_Silo.xlsx
+// Exactly 8 core services across 5 Suffolk County towns
 import serviceLocationsJson from "./serviceLocationsData.json";
 
 export interface ServiceLocationPage {
@@ -33,6 +34,14 @@ export function getServiceLocationPage(serviceSlug: string, townSlug: string): S
   return SERVICE_LOCATION_PAGES.find(
     (p) => p.serviceSlug === serviceSlug && p.townSlug === townSlug
   );
+}
+
+export function getPagesForService(serviceSlug: string): ServiceLocationPage[] {
+  return SERVICE_LOCATION_PAGES.filter((p) => p.serviceSlug === serviceSlug);
+}
+
+export function getPagesForTown(townSlug: string): ServiceLocationPage[] {
+  return SERVICE_LOCATION_PAGES.filter((p) => p.townSlug === townSlug);
 }
 
 export function getAllServiceLocationSlugs(): { service: string; town: string }[] {
