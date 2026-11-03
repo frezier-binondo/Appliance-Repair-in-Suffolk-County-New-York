@@ -2,11 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { 
-  Phone, ShieldCheck, Clock, CheckCircle2, AlertTriangle, 
-  MapPin, Star, ArrowRight, Wrench, Sparkles, HelpCircle 
+  Phone, ShieldCheck, Clock, CheckCircle2, 
+  MapPin, Star, HelpCircle 
 } from "lucide-react";
-import { ServiceLocationPage } from "@/data/serviceLocationsData";
 import { BUSINESS_INFO, LOCATIONS_LIST } from "@/data/siteData";
+import { ServiceLocationPage } from "@/data/serviceLocationsData";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import QuickBookingForm from "@/components/QuickBookingForm";
 import InternalLinkGrid from "@/components/InternalLinkGrid";
@@ -16,21 +16,19 @@ interface ServiceLocationPageTemplateProps {
 }
 
 export default function ServiceLocationPageTemplate({ page }: ServiceLocationPageTemplateProps) {
-  // Service Schema JSON-LD for this service in this specific town
-  const schema = {
+  // Service Schema JSON-LD tailored to the specific town
+  const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": page.h1,
+    "name": `${page.serviceName} in ${page.townName}`,
     "serviceType": page.serviceName,
     "provider": {
       "@type": "LocalBusiness",
       "name": BUSINESS_INFO.name,
       "telephone": BUSINESS_INFO.phone,
-      "url": "https://suffolkcountyappliancerepair.com",
-      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": page.townName.replace(", NY", ""),
+        "addressLocality": page.townShortName,
         "addressRegion": "NY",
         "addressCountry": "US"
       }
@@ -41,12 +39,12 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
     },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": `${page.h1} Catalog`,
-      "itemListElement": page.problems.map((prob) => ({
+      "name": `${page.serviceName} in ${page.townName}`,
+      "itemListElement": page.commonProblems.map((prob) => ({
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": `${prob.title} in ${page.townName}`
+          "name": `${prob.title} - ${page.serviceName}`
         }
       }))
     }
@@ -56,25 +54,25 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
     <div className="bg-slate-50 min-h-screen text-slate-800">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
 
       <Breadcrumbs 
         items={[
           { label: "Services", url: "/appliance-repair-services/" },
           { label: page.serviceName, url: `/${page.serviceSlug}/` },
-          { label: `${page.serviceName} in ${page.townName}` }
+          { label: page.townName }
         ]} 
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - Matching ServicePageTemplate */}
       <section className="relative bg-gradient-to-br from-navy-950 via-brand-950 to-navy-900 text-white py-14 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold tracking-wide">
               <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-              <span>Certified {page.townName} Technicians</span>
+              <span>Certified Suffolk County Specialists</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
@@ -82,7 +80,7 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
             </h1>
 
             <p className="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl">
-              Fast, dependable {page.serviceName.toLowerCase()} across {page.townName} and surrounding neighborhoods. We diagnose accurately, quote flat-rate prices upfront, and back our work with a 90-day parts and labor warranty.
+              {page.shortDesc} Expert technicians diagnosing genuine causes rather than guessing, backed by upfront quotes and our 90-day parts and labor warranty.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -97,7 +95,7 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
                 href="/contact/"
                 className="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
               >
-                Book Inspection in {page.townName.split(",")[0]}
+                Book Inspection Online
               </Link>
             </div>
 
@@ -109,7 +107,7 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
               <span>&bull;</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4 text-amber-400" />
-                Same-Day Dispatch
+                Same-Day Windows
               </span>
               <span>&bull;</span>
               <span>$89 Diagnostic Waived with Repair</span>
@@ -119,7 +117,7 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
           <div className="lg:col-span-5 relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10">
             <Image
               src={page.image}
-              alt={`${page.h1} by local technicians`}
+              alt={`${page.h1} by local technicians in Suffolk County, NY`}
               fill
               priority
               className="object-cover"
@@ -129,10 +127,10 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
             <div className="absolute bottom-4 left-4 right-4 bg-navy-950/90 backdrop-blur p-3.5 rounded-xl border border-white/10 text-xs text-slate-200">
               <div className="font-bold text-white flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                <span>{page.townName} Service Route</span>
+                <span>{page.townName} Mobile Technician Route</span>
               </div>
-              <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">
-                Serving {page.neighborhoods.slice(0, 4).join(", ")} & nearby hamlets
+              <p className="text-[11px] text-slate-400 mt-0.5">
+                Daily service in {page.neighborhoods.slice(0, 4).join(", ")} & nearby hamlets.
               </p>
             </div>
           </div>
@@ -148,50 +146,20 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
           {/* Main Article Content */}
           <div className="lg:col-span-8 space-y-10 prose-content">
             
-            {/* Overview & Local Town Context */}
+            {/* Overview & Symptoms */}
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-sky-100 px-3 py-1 rounded-full">
-                Local Town Context
+                Common Symptoms & Diagnosis
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-navy-950 mt-3 mb-4">
-                Professional {page.serviceName} Throughout {page.townName}
+                Signs Your {page.applianceName} Needs Professional Attention
               </h2>
-              <div className="space-y-4 text-slate-700 leading-relaxed text-base">
-                {page.intro.split("\n\n").map((para, pIdx) => (
-                  <p key={pIdx}>{para}</p>
-                ))}
-              </div>
+              <p className="text-slate-700 leading-relaxed mb-6">
+                {page.symptomsIntro}
+              </p>
 
-              {/* Neighborhoods Tags */}
-              {page.neighborhoods.length > 0 && (
-                <div className="mt-6 p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
-                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">
-                    Neighborhoods We Travel to in {page.townName}:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {page.neighborhoods.map((nh, nhIdx) => (
-                      <span
-                        key={nhIdx}
-                        className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200"
-                      >
-                        {nh}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Common Problems We Fix */}
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-sky-100 px-3 py-1 rounded-full">
-                Local Diagnostic Symptoms
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-navy-950 mt-3 mb-4">
-                Common {page.serviceName} Problems We Fix in {page.townName}
-              </h2>
               <div className="space-y-4">
-                {page.problems.map((prob, idx) => (
+                {page.commonProblems.map((prob, idx) => (
                   <div key={idx} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <h3 className="font-bold text-base text-navy-950 flex items-center gap-2 mb-1.5">
                       <span className="w-2 h-2 rounded-full bg-brand-500"></span>
@@ -205,28 +173,10 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
               </div>
             </div>
 
-            {/* Local Technician Tips */}
-            {page.tips.length > 0 && (
-              <div className="bg-sky-50/70 rounded-2xl p-6 sm:p-8 border border-sky-100 space-y-3">
-                <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-brand-600" />
-                  Appliance Care Tips for {page.townName} Homeowners
-                </h2>
-                <ul className="space-y-2 pt-2">
-                  {page.tips.map((tip, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span>{tip}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* 5-Step Repair Process */}
-            <div>
+            {/* Diagnostic Protocol */}
+            <div className="bg-sky-50/60 rounded-2xl p-6 sm:p-8 border border-sky-100">
               <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950 mb-4">
-                Our {page.serviceName} Process in {page.townName}
+                Our 5-Step {page.serviceName} Protocol in {page.townName}
               </h2>
               <ol className="space-y-3">
                 {page.processSteps.map((step, idx) => (
@@ -240,79 +190,82 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
               </ol>
             </div>
 
-            {/* Brands We Service */}
+            {/* Brands Serviced */}
             <div>
               <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950 mb-3">
-                Brands We Service in {page.townName}
+                Brands We Service for {page.serviceName}
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                {page.brands}
+                Our technicians are trained on both mainstream household brands and high-end luxury systems across {page.townName}. We carry factory OEM sensors, valves, and switches for:
               </p>
-            </div>
-
-            {/* Repair or Replace Advice */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3">
-              <h2 className="text-xl font-extrabold text-navy-950">
-                Repair or Replace? Advice for {page.townName} Residents
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                {page.repairOrReplaceAdvice}
-              </p>
-            </div>
-
-            {/* Why Choose Us */}
-            <div className="border-l-4 border-brand-600 bg-sky-50/50 p-6 rounded-r-2xl space-y-2">
-              <h3 className="text-lg font-bold text-navy-950">
-                Why {page.townName} Customers Choose Us
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                {page.whyChoose}
-              </p>
-            </div>
-
-            {/* FAQs Specific to this Town + Service */}
-            {page.faqs.length > 0 && (
-              <div>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950 mb-4">
-                  Frequently Asked Questions in {page.townName}
-                </h2>
-                <div className="space-y-3">
-                  {page.faqs.map((faq, idx) => (
-                    <details
-                      key={idx}
-                      className="group bg-white rounded-xl p-4 border border-slate-200 shadow-sm open:ring-1 open:ring-brand-500"
-                    >
-                      <summary className="font-bold text-sm text-navy-950 cursor-pointer list-none select-none flex items-center justify-between">
-                        <span className="flex items-center gap-2">
-                          <HelpCircle className="w-4 h-4 text-brand-600 flex-shrink-0" />
-                          {faq.q}
-                        </span>
-                        <span className="text-slate-400 group-open:rotate-180 transition-transform ml-2">
-                          &darr;
-                        </span>
-                      </summary>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-2.5 pt-2.5 border-t border-slate-100">
-                        {faq.a}
-                      </p>
-                    </details>
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-2">
+                {page.brands.map((brand, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-800 shadow-sm"
+                  >
+                    {brand}
+                  </span>
+                ))}
               </div>
-            )}
+            </div>
 
-            {/* Required Internal & External Links with Underline and Popup Colors */}
+            {/* Maintenance Tips */}
+            <div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950 mb-3">
+                Preventive Maintenance Tips from Our Technicians
+              </h2>
+              <ul className="space-y-2">
+                {page.maintenanceTips.map((tip, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <span>{tip}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* FAQs Specific to this Service in this Town */}
+            <div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-navy-950 mb-4">
+                Frequently Asked Questions About {page.serviceName}
+              </h2>
+              <div className="space-y-3">
+                {page.faqs.map((faq, idx) => (
+                  <details
+                    key={idx}
+                    className="group bg-white rounded-xl p-4 border border-slate-200 shadow-sm open:ring-1 open:ring-brand-500"
+                  >
+                    <summary className="font-bold text-sm text-navy-950 cursor-pointer list-none select-none flex items-center justify-between">
+                      <span className="flex items-center gap-2">
+                        <HelpCircle className="w-4 h-4 text-brand-600 flex-shrink-0" />
+                        {faq.q}
+                      </span>
+                      <span className="text-slate-400 group-open:rotate-180 transition-transform ml-2">
+                        &darr;
+                      </span>
+                    </summary>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-2.5 pt-2.5 border-t border-slate-100">
+                      {faq.a}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
+
+            {/* Required Internal & External Links with Popup Colors & Underlines */}
             <InternalLinkGrid
               internalLinks={page.internalLinks}
               externalLinks={page.externalLinks}
               title={`Related Silos & ${page.townName} Resources`}
-              subtitle={`Navigate to our main ${page.serviceName} silo, the ${page.townName} town hub, nearby markets, and official authorities.`}
+              subtitle={`Connect directly with our main ${page.serviceName} silo, nearby Suffolk County town hubs, and official resources.`}
             />
 
           </div>
 
-          {/* Sidebar Conversion Card */}
+          {/* Sidebar Conversion Card & Quick Contact */}
           <div className="lg:col-span-4 space-y-6">
-            <QuickBookingForm title={`Book ${page.serviceName} in ${page.townName.split(",")[0]}`} />
+            <QuickBookingForm title={`Book ${page.serviceName} in ${page.townShortName}`} />
 
             {/* Emergency Hotline Card */}
             <div className="bg-navy-950 text-white rounded-2xl p-6 shadow-xl border border-slate-800 space-y-4">
@@ -320,10 +273,10 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
                 <Phone className="w-5 h-5 fill-current animate-pulse" />
               </div>
               <h3 className="text-lg font-extrabold text-white">
-                Need {page.serviceName} Today?
+                Urgent {page.serviceName} Need?
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Emergency dispatch available for {page.townName} homes. Call our dispatch center directly for same-day booking.
+                If your appliance is leaking water, sparking, or spoiling groceries, speak directly to our dispatch coordinator for priority arrival in {page.townName}.
               </p>
               <a
                 href={`tel:${BUSINESS_INFO.rawPhone}`}
@@ -333,11 +286,11 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
               </a>
             </div>
 
-            {/* Sister Town Hubs for This Service */}
+            {/* Local Towns Served */}
             <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3">
               <h4 className="font-bold text-sm text-navy-950 uppercase tracking-wider flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-brand-600" />
-                {page.serviceName} Across Suffolk County
+                Suffolk County Town Dispatch
               </h4>
               <ul className="space-y-1.5 text-xs text-slate-600">
                 {LOCATIONS_LIST.map((loc) => {
@@ -346,8 +299,8 @@ export default function ServiceLocationPageTemplate({ page }: ServiceLocationPag
                     <li key={loc.slug}>
                       <Link
                         href={`/${page.serviceSlug}/${loc.id}/`}
-                        className={`flex items-center justify-between py-1 border-b border-slate-100 last:border-none ${
-                          isCurrent ? "font-bold text-brand-600" : "hover:text-brand-600"
+                        className={`hover:text-brand-600 flex items-center justify-between py-1 border-b border-slate-100 last:border-none ${
+                          isCurrent ? "font-bold text-brand-600" : ""
                         }`}
                       >
                         <span>{page.serviceName} in {loc.townName}</span>

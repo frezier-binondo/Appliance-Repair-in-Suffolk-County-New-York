@@ -1,5 +1,5 @@
-// Auto-generated 40 Service-by-Town Pages from Suffolk_County_Appliance_Repair_SEO_Silo.xlsx
-// Exactly 8 core services across 5 Suffolk County towns
+// Auto-generated 45 Service-by-Town Pages
+// 9 core services across 5 Suffolk County towns
 import serviceLocationsJson from "./serviceLocationsData.json";
 
 export interface ServiceLocationPage {
@@ -8,24 +8,24 @@ export interface ServiceLocationPage {
   serviceSlug: string;
   townSlug: string;
   serviceName: string;
+  applianceName: string;
   townName: string;
+  townShortName: string;
   h1: string;
   metaTitle: string;
   metaDescription: string;
   targetKeyword: string;
   image: string;
   neighborhoods: string[];
-  intro: string;
-  problems: { title: string; desc: string }[];
+  shortDesc: string;
+  symptomsIntro: string;
+  commonProblems: { title: string; desc: string }[];
   processSteps: string[];
-  brands: string;
-  tips: string[];
-  repairOrReplaceAdvice: string;
-  whyChoose: string;
+  brands: string[];
+  maintenanceTips: string[];
   faqs: { q: string; a: string }[];
   internalLinks: { anchor: string; url: string; isExternal?: boolean }[];
   externalLinks: { anchor: string; url: string; isExternal?: boolean }[];
-  rawContent: string;
 }
 
 export const SERVICE_LOCATION_PAGES: ServiceLocationPage[] = serviceLocationsJson as ServiceLocationPage[];
