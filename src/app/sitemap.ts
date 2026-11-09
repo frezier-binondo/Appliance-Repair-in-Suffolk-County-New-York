@@ -43,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // All 45 Service-by-Town Pages (9 core services x 5 towns)
+  // All 40 Service-by-Town Pages (8 core services x 5 towns)
   const serviceLocationPages: MetadataRoute.Sitemap = SERVICE_LOCATION_PAGES.map((page) => ({
     url: `${BASE_URL}${page.slug}`,
     lastModified,

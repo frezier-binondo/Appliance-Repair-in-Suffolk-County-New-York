@@ -350,7 +350,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     targetKeyword: "Oven Repair Suffolk County NY",
     shortDesc: "Accurate repair for single and double wall ovens, convection ovens, and electric/gas baking units.",
     image: "https://images.unsplash.com/photo-1614622394738-7e6df45fdfcd?auto=format&fit=crop&w=1200&q=80",
-    icon: "Microwave",
+    icon: "Flame",
     commonProblems: [
       { title: "Oven Won't Heat at All", desc: "Burned-out bake or broil element, weak glow-bar igniter in gas ovens, or blown thermal fuse." },
       { title: "Uneven Baking or Inaccurate Temperature", desc: "Failing temperature sensor probe (RTD), bad thermostat, or leaking door gasket." },
@@ -379,7 +379,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       { anchor: "All Appliance Repair Services", url: "/appliance-repair-services/" },
       { anchor: "Stove & Range Repair", url: "/stove-range-repair/" },
       { anchor: "Cooktop Repair", url: "/cooktop-repair/" },
-      { anchor: "Microwave Repair", url: "/microwave-repair/" },
+      { anchor: "Dishwasher Repair", url: "/dishwasher-repair/" },
       { anchor: "Oven Repair in Huntington, NY", url: "/appliance-repair-huntington-ny/" },
       { anchor: "Oven Repair in Smithtown, NY", url: "/appliance-repair-smithtown-ny/" },
       { anchor: "Contact Us", url: "/contact/" }
@@ -429,7 +429,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       { anchor: "All Appliance Repair Services", url: "/appliance-repair-services/" },
       { anchor: "Oven Repair", url: "/oven-repair/" },
       { anchor: "Cooktop Repair", url: "/cooktop-repair/" },
-      { anchor: "Microwave Repair", url: "/microwave-repair/" },
+      { anchor: "Dishwasher Repair", url: "/dishwasher-repair/" },
       { anchor: "Stove & Range Repair in Huntington, NY", url: "/appliance-repair-huntington-ny/" },
       { anchor: "Stove & Range Repair in Smithtown, NY", url: "/appliance-repair-smithtown-ny/" },
       { anchor: "Contact Us", url: "/contact/" }
@@ -479,7 +479,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       { anchor: "All Appliance Repair Services", url: "/appliance-repair-services/" },
       { anchor: "Stove & Range Repair", url: "/stove-range-repair/" },
       { anchor: "Oven Repair", url: "/oven-repair/" },
-      { anchor: "Luxury Appliance Repair", url: "/luxury-appliance-repair/" },
+      { anchor: "Dishwasher Repair", url: "/dishwasher-repair/" },
       { anchor: "Cooktop Repair in Huntington, NY", url: "/appliance-repair-huntington-ny/" },
       { anchor: "Cooktop Repair in Smithtown, NY", url: "/appliance-repair-smithtown-ny/" },
       { anchor: "Contact Us", url: "/contact/" }
@@ -489,56 +489,6 @@ export const SERVICES_LIST: ServiceDetail[] = [
       { anchor: "ENERGY STAR certified products", url: "https://www.energystar.gov/products", isExternal: true }
     ],
     fullContentText: `Built-in cooktops add clean architectural elegance to modern Suffolk County kitchens. However, repairing built-in gas, radiant electric, or high-tech induction cooktops requires specialized technical training and delicate handling around custom stone countertops. Appliance Repair in Suffolk County New York brings specialized diagnostic meters and genuine OEM replacement parts to protect your investment and restore your cooktop flawlessly.`
-  },
-  {
-    id: "microwave-repair",
-    slug: "microwave-repair",
-    name: "Microwave Repair",
-    h1: "Microwave Repair in Suffolk County, NY",
-    metaTitle: "Microwave Repair Suffolk County, NY | Over-the-Range & Built-In",
-    metaDescription: "Need microwave repair in Suffolk County, NY? Local technicians fix heating, display and door faults with upfront quotes. Call (631) 505-5046 to book.",
-    targetKeyword: "Microwave Repair Suffolk County NY",
-    shortDesc: "Certified technician repairs for over-the-range, built-in drawer, and convection microwave units.",
-    image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1200&q=80",
-    icon: "Radio",
-    commonProblems: [
-      { title: "Microwave Runs but Will Not Heat", desc: "Burned magnetron tube, high-voltage diode failure, or shorted high-voltage capacitor." },
-      { title: "Sparking and Arcing Inside Cavity", desc: "Burned mica waveguide cover, charred paint exposing bare metal, or metallic residue." },
-      { title: "Turntable Won't Turn", desc: "Broken turntable synchronous motor, stripped roller guide, or fractured coupler." },
-      { title: "Unit Dies When Door is Opened or Closed", desc: "Misaligned or shorted door interlock micro-switch blowing internal ceramic line fuse." }
-    ],
-    processSteps: [
-      "Safely discharge high-voltage capacitor (up to 5,000 volts).",
-      "Test door interlock safety switches and monitor micro-switches.",
-      "Test high-voltage transformer, diode, and magnetron resistance.",
-      "Replace defective OEM components and verify RF radiation safety shielding.",
-      "Full microwave wattage test using calibrated water heating measurement."
-    ],
-    brands: ["GE Profile", "Samsung", "LG", "Whirlpool", "Sharp", "Panasonic", "KitchenAid", "Bosch", "Frigidaire", "Maytag"],
-    maintenanceTips: [
-      "Never run a microwave oven empty (this damages the magnetron).",
-      "Replace mica waveguide covers if they become greasy or discolored.",
-      "Do not use metal utensils or dishes with gold or silver metallic trim.",
-      "Wipe interior walls and door seal surfaces weekly with mild soap."
-    ],
-    faqs: [
-      { q: "Is it worth repairing an over-the-range microwave?", a: "Yes. While cheap small countertop microwaves may not be cost-effective to repair, built-in and over-the-range microwaves connected to cabinetry and ventilation are well worth professional repair." },
-      { q: "Why did my microwave spark when heating soup?", a: "Food splatter on the waveguide cover can absorb microwave energy and char, creating an electrical arc. Stop use and let a technician replace the inexpensive cover." }
-    ],
-    internalLinks: [
-      { anchor: "All Appliance Repair Services", url: "/appliance-repair-services/" },
-      { anchor: "Oven Repair", url: "/oven-repair/" },
-      { anchor: "Cooktop Repair", url: "/cooktop-repair/" },
-      { anchor: "Stove & Range Repair", url: "/stove-range-repair/" },
-      { anchor: "Microwave Repair in Huntington, NY", url: "/appliance-repair-huntington-ny/" },
-      { anchor: "Microwave Repair in Smithtown, NY", url: "/appliance-repair-smithtown-ny/" },
-      { anchor: "Contact Us", url: "/contact/" }
-    ],
-    externalLinks: [
-      { anchor: "NFPA cooking safety guidance", url: "https://www.nfpa.org/education-and-research/home-fire-safety/cooking", isExternal: true },
-      { anchor: "ENERGY STAR certified products", url: "https://www.energystar.gov/products", isExternal: true }
-    ],
-    fullContentText: `Microwaves are used multiple times every day in modern households. When a built-in or over-the-range microwave sparks, ceases heating, or shuts down entirely, dinner routines are instantly disrupted. Because microwave ovens contain high-voltage capacitors that hold lethal electrical charges even when unplugged, repairs must always be handled by certified professionals. We safely repair magnetrons, diodes, switches, and control boards across Suffolk County.`
   }
 ];
 
@@ -742,7 +692,7 @@ export const FAQS_LIST: FAQItem[] = [
   {
     id: 2,
     question: "How do I book an appliance repair appointment?",
-    answer: "You can book directly by calling our dispatch line at (631) 505-5046 or by filling out our online service request form. Let us know the appliance brand, model number (if available), a brief description of the issue, and your preferred service date.",
+    answer: "You can book directly by calling our dispatch line at (631) 505-5046. Let us know the appliance brand, model number (if available), a brief description of the issue, and your preferred service date.",
     category: "Booking"
   },
   {

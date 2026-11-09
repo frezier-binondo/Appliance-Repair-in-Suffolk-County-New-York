@@ -103,7 +103,7 @@ export default function HomePage() {
                   href="/contact/"
                   className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-base border border-white/25 transition-all text-center"
                 >
-                  <span>Schedule Service Online</span>
+                  <span>Contact Our Dispatch Team</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -157,7 +157,7 @@ export default function HomePage() {
           </p>
 
           <p className="text-slate-700 leading-relaxed">
-            Call <a href={`tel:${BUSINESS_INFO.rawPhone}`} className="font-bold">{BUSINESS_INFO.phone}</a> or book online to secure the earliest appointment window. We provide comprehensive repair services for refrigerators, freezers, washing machines, dryers, dishwashers, wall ovens, stoves, cooktops, microwaves, ice makers, wine coolers, and garbage disposals, as well as commercial kitchen appliances and premium luxury equipment. All our repairs follow strict manufacturer guidelines and use genuine factory OEM replacement parts to preserve the longevity of your investment.
+            Call <a href={`tel:${BUSINESS_INFO.rawPhone}`} className="font-bold">{BUSINESS_INFO.phone}</a> to secure the earliest appointment window. We provide comprehensive repair services for refrigerators, freezers, washing machines, dryers, dishwashers, wall ovens, stoves, cooktops, ice makers, wine coolers, and garbage disposals, as well as commercial kitchen appliances and premium luxury equipment. All our repairs follow strict manufacturer guidelines and use genuine factory OEM replacement parts to preserve the longevity of your investment.
           </p>
         </div>
 
@@ -635,7 +635,7 @@ export default function HomePage() {
               Ready to Restore Your Appliance Today?
             </h2>
             <p className="text-slate-200 text-sm sm:text-base">
-              Call our Suffolk County dispatch team at <span className="font-extrabold text-amber-300">{BUSINESS_INFO.phone}</span> or book online. Fast arrival, honest upfront quotes, and 90-day peace of mind.
+              Call our Suffolk County dispatch team at <span className="font-extrabold text-amber-300">{BUSINESS_INFO.phone}</span> for prompt service. Fast arrival, honest upfront quotes, and 90-day peace of mind.
             </p>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

@@ -25,7 +25,6 @@ export default function BlogHubPage() {
     { anchor: "Oven Repair", url: "/oven-repair/" },
     { anchor: "Stove & Range Repair", url: "/stove-range-repair/" },
     { anchor: "Cooktop Repair", url: "/cooktop-repair/" },
-    { anchor: "Microwave Repair", url: "/microwave-repair/" },
     { anchor: "Appliance Repair Huntington", url: "/appliance-repair-huntington-ny/" },
     { anchor: "Appliance Repair Smithtown", url: "/appliance-repair-smithtown-ny/" },
     { anchor: "Contact Us", url: "/contact/" }
@@ -115,7 +114,7 @@ export default function BlogHubPage() {
           </div>
 
           <p>
-            When an issue requires specialized diagnostic equipment—such as handling high-voltage microwave capacitors, testing sealed Freon systems, or diagnosing high-amperage heating elements—our licensed technicians are on standby throughout Suffolk County. Call <a href={`tel:${BUSINESS_INFO.rawPhone}`} className="font-bold">{BUSINESS_INFO.phone}</a> for same-day service.
+            When an issue requires specialized diagnostic equipment—such as testing sealed Freon refrigeration systems, checking high-voltage gas safety valves, or diagnosing high-amperage heating elements—our licensed technicians are on standby throughout Suffolk County. Call <a href={`tel:${BUSINESS_INFO.rawPhone}`} className="font-bold">{BUSINESS_INFO.phone}</a> for same-day service.
           </p>
         </div>
 

@@ -25,7 +25,6 @@ export default function ServicesHubPage() {
     { anchor: "Oven Repair", url: "/oven-repair/" },
     { anchor: "Stove & Range Repair", url: "/stove-range-repair/" },
     { anchor: "Cooktop Repair", url: "/cooktop-repair/" },
-    { anchor: "Microwave Repair", url: "/microwave-repair/" },
     { anchor: "Appliance Repair Huntington", url: "/appliance-repair-huntington-ny/" },
     { anchor: "Appliance Repair Smithtown", url: "/appliance-repair-smithtown-ny/" },
     { anchor: "Appliance Repair Islip", url: "/appliance-repair-islip-ny/" },
@@ -114,7 +113,7 @@ export default function ServicesHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {SERVICES_LIST.slice(0, 9).map((service, idx) => (
+            {SERVICES_LIST.map((service, idx) => (
               <div
                 key={service.slug}
                 className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group overflow-hidden"

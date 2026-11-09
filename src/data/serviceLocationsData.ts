@@ -1,5 +1,5 @@
-// Auto-generated 45 Service-by-Town Pages
-// 9 core services across 5 Suffolk County towns
+// Auto-generated 40 Service-by-Town Pages
+// 8 core services across 5 Suffolk County towns
 import serviceLocationsJson from "./serviceLocationsData.json";
 
 export interface ServiceLocationPage {

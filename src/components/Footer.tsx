@@ -34,7 +34,7 @@ export default function Footer() {
               href="/contact/"
               className="flex items-center justify-center w-full sm:w-auto px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
             >
-              Request Service Online
+              Contact Dispatch Team
             </Link>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default function Footer() {
               Repair Services Silo
             </h4>
             <ul className="space-y-2 text-sm">
-              {SERVICES_LIST.slice(0, 9).map((service) => (
+              {SERVICES_LIST.map((service) => (
                 <li key={service.slug}>
                   <Link
                     href={`/${service.slug}/`}
@@ -151,7 +151,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/contact/" className="hover:text-white transition-colors">
-                  Contact & Diagnostic Booking
+                  Contact & Dispatch Line
                 </Link>
               </li>
             </ul>

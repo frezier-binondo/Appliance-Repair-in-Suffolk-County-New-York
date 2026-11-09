@@ -28,9 +28,9 @@ const patchogueDeepContent = {
       repairFix: "We clear clogged internal condenser heat exchangers, replace drain pumps, and balance high-speed spin drums to eliminate structural apartment vibration."
     },
     {
-      appliance: "Slide-In Cooking Range & Over-the-Range Microwave Repair",
-      localScenario: "Smaller downtown kitchens heavily rely on slide-in induction ranges and integrated over-the-range microwave ventilation units that see frequent daily cooking use.",
-      repairFix: "We replace high-voltage microwave diodes and magnetrons, repair induction surface power modules, and calibrate electric bake elements."
+      appliance: "Slide-In Cooking Range & Cooktop Repair",
+      localScenario: "Smaller downtown kitchens heavily rely on slide-in induction ranges and ceramic glass cooktops that see frequent daily cooking use.",
+      repairFix: "We repair induction surface power modules, replace infinite burner switches, and calibrate electric bake elements."
     },
     {
       appliance: "Dishwasher Drain & Disposal Diagnostics",

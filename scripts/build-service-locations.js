@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// 9 Core services from the main service pages
+// 8 Core services from the main service pages
 const SERVICES = [
   {
     slug: 'refrigerator-repair',
@@ -426,58 +426,6 @@ const SERVICES = [
         a: `Yes, we service integrated gas and electric cooktops paired with motorized pop-up downdraft exhaust systems across ${town}.`
       }
     ]
-  },
-  {
-    slug: 'microwave-repair',
-    name: 'Microwave Repair',
-    applianceName: 'Microwave',
-    image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=1200&q=80',
-    brands: ['Sharp', 'GE Profile', 'KitchenAid', 'Panasonic', 'Whirlpool', 'Bosch', 'Thermador', 'Viking', 'Samsung', 'LG'],
-    commonProblemTemplates: [
-      {
-        title: 'Microwave Runs and Turns But Food Remains Completely Cold',
-        desc: (town) => `Burned-out high-voltage magnetron tubes, shorted high-voltage diodes, or failed high-voltage capacitors prevent microwave energy generation in ${town} kitchens.`
-      },
-      {
-        title: 'Arcing Sparks and Crackling Noises Inside Cavity',
-        desc: (town) => `Burned mica waveguide covers, carbonized grease residue, or chipped interior cavity enamel cause electrical arcing and loud buzzing during heating in ${town}.`
-      },
-      {
-        title: 'Microwave Stops Immediately When Start Button is Pressed',
-        desc: (town) => `Defective primary or secondary door interlock microswitches fail to register that the door is closed, triggering the internal thermal fuse safety shutoff in ${town} homes.`
-      },
-      {
-        title: 'Turntable Roller Not Rotating or Making Loud Grinding Noise',
-        desc: (town) => `Stripped glass turntable drive motor couplers, broken turntable support rings, or seized motor windings cause uneven heating and clicking noises.`
-      }
-    ],
-    protocolSteps: (town) => [
-      `High-Voltage Safety Discharge & Diagnostic: Safe discharge of high-voltage capacitor followed by component testing in your ${town} home.`,
-      `Upfront Flat-Rate Estimate: Clear transparent pricing before any repair begins.`,
-      `Factory OEM Replacement: Installation of genuine magnetrons, high-voltage diodes, door switches, or touch keypads.`,
-      `Microwave Radiation Leakage Test: Precision RF emission meter testing to verify zero microwave leakage and 100% door seal safety.`,
-      `90-Day Parts & Labor Guarantee: Total peace of mind on all completed microwave repairs across ${town}.`
-    ],
-    maintenanceTips: (town) => [
-      `Never run a microwave completely empty; without moisture to absorb energy, the magnetron can burn out in seconds in ${town}.`,
-      `Wipe interior walls and the mica waveguide cover promptly to prevent food splatter from carbonizing and sparking.`,
-      `Avoid using metal twist ties, metallic-rimmed plates, or aluminum foil inside the microwave cavity.`,
-      `Replace the grease and charcoal filters on over-the-range microwave vent fans every 6 to 12 months.`
-    ],
-    faqTemplates: (town) => [
-      {
-        q: `Do you service over-the-range and built-in drawer microwaves in ${town}?`,
-        a: `Yes, we repair built-in microwave drawers (like Sharp, Wolf, and Thermador), over-the-range convection microwaves, and speed ovens across ${town}.`
-      },
-      {
-        q: `Is it worth repairing a built-in or over-the-range microwave in ${town}?`,
-        a: `Yes! Built-in drawer and over-the-range microwaves often cost $800 to $2,500+ to replace with custom cabinetry fitting. Replacing a diode, switch, or magnetron is far more cost-effective.`
-      },
-      {
-        q: `How do you ensure microwave safety after a repair?`,
-        a: `Every microwave repair includes a calibrated RF radiation survey with an electromagnetic meter to certify zero radiation leakage around door seals before leaving your ${town} home.`
-      }
-    ]
   }
 ];
 
@@ -596,8 +544,8 @@ for (const serv of SERVICES) {
 fs.writeFileSync(path.join(__dirname, '../src/data/serviceLocationsData.json'), JSON.stringify(parsedItems, null, 2), 'utf8');
 
 // Write TS
-const tsContent = `// Auto-generated 45 Service-by-Town Pages
-// 9 core services across 5 Suffolk County towns
+const tsContent = `// Auto-generated 40 Service-by-Town Pages
+// 8 core services across 5 Suffolk County towns
 import serviceLocationsJson from "./serviceLocationsData.json";
 
 export interface ServiceLocationPage {

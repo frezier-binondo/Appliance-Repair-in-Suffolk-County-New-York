@@ -28,8 +28,7 @@ const serviceSilos = [
   'dishwasher-repair',
   'oven-repair',
   'stove-range-repair',
-  'cooktop-repair',
-  'microwave-repair'
+  'cooktop-repair'
 ].map(s => ({
   url: `${BASE_URL}/${s}/`,
   priority: '0.9',

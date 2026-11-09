@@ -90,7 +90,7 @@ export default function Header() {
                   <div className="px-3 py-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
                     Core Repair Silos
                   </div>
-                  {SERVICES_LIST.slice(0, 9).map((service) => (
+                  {SERVICES_LIST.map((service) => (
                     <Link
                       key={service.slug}
                       href={`/${service.slug}/`}
@@ -105,7 +105,7 @@ export default function Header() {
                       href="/appliance-repair-services/"
                       className="block px-3 py-1.5 text-xs font-bold text-center text-brand-600 hover:text-brand-800 bg-sky-50 rounded-lg transition-colors"
                     >
-                      View All 14+ Repair Services &rarr;
+                      View All Repair Services &rarr;
                     </Link>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function Header() {
               </Link>
             </div>
             <div className="pl-3 space-y-1.5 pb-2 border-b border-slate-100">
-              {SERVICES_LIST.slice(0, 9).map((service) => (
+              {SERVICES_LIST.map((service) => (
                 <Link
                   key={service.slug}
                   href={`/${service.slug}/`}

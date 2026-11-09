@@ -90,7 +90,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
                 href="/contact/"
                 className="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
               >
-                Book Inspection Online
+                Contact Dispatch
               </Link>
             </div>
 

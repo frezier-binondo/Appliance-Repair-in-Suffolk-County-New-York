@@ -80,7 +80,7 @@ export default function ContactPage() {
             Contact Appliance Repair in Suffolk County, NY
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed">
-            Need an experienced technician today? Call <span className="font-extrabold text-amber-300">{BUSINESS_INFO.phone}</span> or complete our service request form below. We provide upfront quotes with zero hidden travel charges.
+            Need an experienced technician today? Call <span className="font-extrabold text-amber-300">{BUSINESS_INFO.phone}</span> to reach our central dispatch team. We provide upfront quotes with zero hidden travel charges.
           </p>
         </div>
       </section>

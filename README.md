@@ -6,7 +6,7 @@ A modern, high-converting Next.js website for **Appliance Repair in Suffolk Coun
 
 - **SEO Silo Structure:**
   - **Home Page (`/`):** ~2,000 words of locally optimized content, repair-or-replace decision matrix, technician advice, and service area breakdowns.
-  - **Services Hub (`/appliance-repair-services/`):** 9 Core repair silos (Refrigerator, Freezer, Washer, Dryer, Dishwasher, Oven, Stove & Range, Cooktop, Microwave) with symptoms, diagnostic procedures, OEM parts, and town links.
+  - **Services Hub (`/appliance-repair-services/`):** 8 Core repair silos (Refrigerator, Freezer, Washer, Dryer, Dishwasher, Oven, Stove & Range, Cooktop) with symptoms, diagnostic procedures, OEM parts, and town links.
   - **Locations Hub (`/service-areas/`):** 5 Location hubs (~2,000 words each) for Huntington, Smithtown, Islip, Babylon, and Patchogue with unique local architectural context and neighborhood profiles.
   - **Blog (`/blog/`):** In-depth troubleshooting guides with diagnosis checklists and internal links.
   - **FAQ (`/frequently-asked-questions/`):** 10 common questions with accordion UI and `FAQPage` schema.
