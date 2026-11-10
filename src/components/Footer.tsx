@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Phone, Mail, MapPin, ShieldCheck, Clock, ExternalLink, Wrench, Star } from "lucide-react";
+import { Phone, MapPin, ShieldCheck, Clock, ExternalLink, Wrench, Star } from "lucide-react";
 import { BUSINESS_INFO, SERVICES_LIST, LOCATIONS_LIST } from "@/data/siteData";
 
 export default function Footer() {
@@ -173,14 +173,6 @@ export default function Footer() {
                   <div>{BUSINESS_INFO.phone}</div>
                   <div className="text-xs font-normal text-slate-400">Direct Technician Dispatch</div>
                 </div>
-              </a>
-
-              <a
-                href={`mailto:${BUSINESS_INFO.email}`}
-                className="flex items-center gap-2.5 text-slate-300 hover:text-white"
-              >
-                <Mail className="w-4 h-4 text-sky-400" />
-                <span className="text-xs truncate">{BUSINESS_INFO.email}</span>
               </a>
 
               <div className="pt-2">

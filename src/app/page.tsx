@@ -328,9 +328,9 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-black text-xl flex items-center justify-center mb-4">
                 1
               </div>
-              <h3 className="font-bold text-lg text-navy-950 mb-2">Call or Book Online</h3>
+              <h3 className="font-bold text-lg text-navy-950 mb-2">Call for Service</h3>
               <p className="text-sm text-slate-600">
-                Contact our dispatch team at <a href={`tel:${BUSINESS_INFO.rawPhone}`} className="font-semibold text-brand-600">(631) 505-5046</a> or fill out our online request form detailing the symptoms.
+                Contact our dispatch team at <a href={`tel:${BUSINESS_INFO.rawPhone}`} className="font-semibold text-brand-600">(631) 505-5046</a> to describe your appliance symptoms and secure a priority arrival window.
               </p>
             </div>
 

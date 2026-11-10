@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { 
-  Phone, Mail, MapPin, Clock, ShieldCheck, CheckCircle2, 
+  Phone, MapPin, Clock, ShieldCheck, CheckCircle2, 
   ExternalLink, AlertTriangle, ArrowRight, Wrench 
 } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -93,57 +93,42 @@ export default function ContactPage() {
           {/* Left Column: Direct Contact Info & Procedures */}
           <div className="lg:col-span-7 space-y-8 prose-content">
             
-            {/* Quick Contact Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              
-              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-3">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-                    Direct Phone Line
-                  </h3>
-                  <a
-                    href={`tel:${BUSINESS_INFO.rawPhone}`}
-                    className="text-xl font-extrabold text-navy-950 hover:text-brand-600 transition-colors block mt-1"
-                  >
-                    {BUSINESS_INFO.phone}
-                  </a>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Available Monday – Saturday 7am – 8pm
-                  </p>
+            {/* Quick Contact Card - Live Calls Only */}
+            <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider mb-2">
+                  <Phone className="w-3.5 h-3.5 text-amber-600" />
+                  Live Dispatch Line
                 </div>
-                <div className="pt-3 border-t border-slate-100 mt-4 text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Same-Day Appointments
-                </div>
-              </div>
-
-              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-sky-100 text-brand-700 flex items-center justify-center mb-3">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-                    Email Customer Support
-                  </h3>
-                  <a
-                    href={`mailto:${BUSINESS_INFO.email}`}
-                    className="text-sm font-bold text-navy-950 hover:text-brand-600 transition-colors block mt-1 break-all"
-                  >
-                    {BUSINESS_INFO.email}
-                  </a>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Replies within 1-2 hours during business hours
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-100 mt-4 text-[11px] text-brand-600 font-semibold flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  Licensed & Insured
+                <a
+                  href={`tel:${BUSINESS_INFO.rawPhone}`}
+                  className="text-2xl sm:text-4xl font-black text-navy-950 hover:text-brand-600 transition-colors block mt-1 tracking-tight"
+                >
+                  {BUSINESS_INFO.phone}
+                </a>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                  Live Dispatch: Monday – Saturday 7:00 AM – 8:00 PM | Sunday: 8:00 AM – 5:00 PM
+                </p>
+                <div className="flex flex-wrap items-center gap-4 text-xs font-semibold mt-3">
+                  <span className="flex items-center gap-1 text-emerald-600">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    Same-Day Dispatch (Calls before 12 PM)
+                  </span>
+                  <span className="text-slate-300">&bull;</span>
+                  <span className="flex items-center gap-1 text-brand-600">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    Suffolk DCA Lic #49281-H
+                  </span>
                 </div>
               </div>
 
+              <a
+                href={`tel:${BUSINESS_INFO.rawPhone}`}
+                className="flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-base shadow-lg transition-transform transform hover:-translate-y-0.5 whitespace-nowrap w-full sm:w-auto"
+              >
+                <Phone className="w-5 h-5 fill-current animate-pulse" />
+                <span>Call {BUSINESS_INFO.phone}</span>
+              </a>
             </div>
 
             {/* Operating Hours & Dispatch Details */}
